@@ -1,7 +1,10 @@
 <h1>rigctl, rot   ctl, rigmem, rigsmtr, rigswr API</h1>
 You may use the following API demo methods:<br>
-curl localhost/trx/0/qrg<br>
-curl -XPOST localhost/trx/0/qrg -d'{ "newValue":"145425000"}<br>
+curl localhost/rigctl_api/trx/0/qrg<br>
+curl -XPOST localhost/rigctl_api/trx/0/qrg -d'{"newValue":"145425000"}'<br>
+curl localhost/rigctl_api/trx/0/mode<br>
+curl -XPOST localhost/rigctl_api/trx/0/mode -d'{"mode":"FM","passband":9000}'<br>
+curl -XPOST localhost/rigctl_api/trx/0/mode -d'{"mode":"USB","passband":2400}'<br>
 
 <br><br>
 Have a look at the <a href="https://github.com/DL4OCE/rigctl_api">rigctl_api git repository</a> for source code and documentation!

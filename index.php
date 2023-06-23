@@ -6,13 +6,15 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(-1);
 
+// die($_SERVER['REQUEST_URI']);
+
 // print_r($_SERVER);
 
 //require_once('src/Bramus/Router/Router.php');
 require_once "vendor/autoload.php";
 require_once "lib/rigctl/rigctl.php";
 
-$model = 120;
+$model = 1020;
 $device = "/dev/ttyUSB0";
 
 $router = new \Bramus\Router\Router();
@@ -53,7 +55,15 @@ $router->get('/trx/(\d+)/qrg', function($trx_id) {
 });
 
 $router->post('/trx/(\d+)/qrg', function($trx_id) {
-    echo set_trx_qrg($trx_id, getRequestBody());
+    echo set_trx_qrg(json_decode(getRequestBody(), true), $trx_id);
+});
+
+$router->get('/trx/(\d+)/mode', function($trx_id) {
+    echo get_trx_mode($trx_id);
+});
+
+$router->post('/trx/(\d+)/mode', function($trx_id) {
+    echo set_trx_mode(json_decode(getRequestBody(), true), $trx_id);
 });
 
 $router->run();
