@@ -44,27 +44,37 @@ $router->set404(function() {
 //     echo json_encode($jsonArray);
 // });
 
-
-
-$router->mount('/trx', function() use ($router) {
-    // $router->get('/', function() {
-    //     // prepareResult();
-    // });
-
-    $router->get('/(\d+)/qrg', function($trx_id) {
-        echo get_trx_qrg($trx_id);
-        // echo 'trx id ' . htmlentities($id);
-    });
-
-});
-
 $router->get('/', function () {
-    echo '<h1>rigctl, rot   ctl, rigmem, rigsmtr, rigswr API</h1>
-    Have a look at the <a href="https://github.com/DL4OCE/rigctl_api">rigctl_api git repository</a> for source code and documentation!';
+    echo file_get_contents('usage.html');
 });
 
+$router->get('/trx/(\d+)/qrg', function($trx_id) {
+    echo get_trx_qrg($trx_id);
+});
+
+$router->post('/trx/(\d+)/qrg', function($trx_id) {
+    echo set_trx_qrg($trx_id, getRequestBody());
+});
 
 $router->run();
 
+function getRequestBody(){
+    $entityBody = file_get_contents('php://input');
+    return($entityBody);
+}
+
+function build_response($response){
+    http_response_code(200);
+    // $response_complete = array(
+    //     "test" => "testvalue",
+    //     "response" => $response
+    // );
+    // echo json_encode($response_complete);
+    echo json_encode(array(
+        "REQUEST_URI" => $_SERVER['REQUEST_URI'],
+        "REQUEST_BODY" => getRequestBody(),
+        "response" => $response
+    ));
+}
 
 ?>
