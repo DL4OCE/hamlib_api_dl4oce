@@ -1,10 +1,34 @@
 <h1>rigctl, rot   ctl, rigmem, rigsmtr, rigswr API</h1>
 You may use the following API demo methods:<br>
-curl localhost/rigctl_api/trx/0/qrg<br>
-curl -XPOST localhost/rigctl_api/trx/0/qrg -d'{"newValue":"145425000"}'<br>
+
+curl localhost/rigctl_api/trx/0/frequency<br>
+curl -XPOST localhost/rigctl_api/trx/0/frequency -d'{"newValue":"145425000"}'<br>
+
 curl localhost/rigctl_api/trx/0/mode<br>
 curl -XPOST localhost/rigctl_api/trx/0/mode -d'{"mode":"FM","passband":9000}'<br>
 curl -XPOST localhost/rigctl_api/trx/0/mode -d'{"mode":"USB","passband":2400}'<br>
+
+curl localhost/rigctl_api/trx/0/split_frequency
+curl -XPOST localhost/rigctl_api/trx/0/split_frequency -d'{"newValue":145725100}'<br>
+
+curl localhost/rigctl_api/trx/0/split_mode
+curl -XPOST localhost/rigctl_api/trx/0/split_mode -d'{"mode":"FM","passband":9000}'
+
+curl localhost/rigctl_api/trx/0/split_frequency_mode
+curl -XPOST localhost/rigctl_api/trx/0/split_frequency_mode -d'{"frequency":145425300, "mode":"FM","passband":9000}'
+
+curl localhost/rigctl_api/trx/0/split_vfo
+curl -XPOST localhost/rigctl_api/trx/0/split_vfo -d'{"split_mode":1,"tx_vfo":"VFOA"}'
+curl -XPOST localhost/rigctl_api/trx/0/split_vfo -d'{"split_mode":0,"tx_vfo":"VFOA"}'
+
+curl localhost/rigctl_api/trx/0/tuning_step
+curl -XPOST localhost/rigctl_api/trx/0/tuning_step -d'{"newValue":5000}'
+curl -XPOST localhost/rigctl_api/trx/0/tuning_step -d'{"newValue":10000}'
+
+curl localhost/rigctl_api/trx/0/level/SQL
+curl -XPOST localhost/rigctl_api/trx/0/level/SQL -d'{"newValue":1}'
+
+
 
 <br><br>
 Have a look at the <a href="https://github.com/DL4OCE/rigctl_api">rigctl_api git repository</a> for source code and documentation!
