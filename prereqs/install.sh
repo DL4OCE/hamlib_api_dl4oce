@@ -9,4 +9,6 @@ cd /tmp/hamlib
 make -j4
 make install
 ldconfig
-
+https://github.com/DL4OCE/rigctl_api.git -o /var/www/html/rigctl_api
+a2enmod rewrite
+systemctl restart apache2
