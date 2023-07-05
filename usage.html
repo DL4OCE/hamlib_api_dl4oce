@@ -102,12 +102,16 @@ curl -XPOST localhost/rigctl_api/trx/0/dump_capabilities
 
 curl -XPOST localhost/rigctl_api/trx/0/dump_configuration
 
+curl -XPOST localhost/rigctl_api/trx/0/dump_state
+
 curl -XPOST localhost/rigctl_api/trx/0/morse -d'{"text":"test"}'
 curl -XPOST localhost/rigctl_api/trx/0/morse_stop
 
 curl localhost/rigctl_api/trx/0/ctcss_sql
+curl -XPOST localhost/rigctl_api/trx/0/ctcss_sql -d'{"newValue":885}'
 
 curl localhost/rigctl_api/trx/0/dcs_sql
+curl -XPOST localhost/rigctl_api/trx/0/dcs_sql -d'{"newValue":4}'
 
 curl localhost/rigctl_api/trx/0/dtmf
 
@@ -117,6 +121,24 @@ curl localhost/rigctl_api/trx/0/twiddle
 
 curl localhost/rigctl_api/trx/0/cache
 curl -XPOST localhost/rigctl_api/trx/0/cache -d'{"newValue":500}'
+
+curl localhost/rigctl_api/trx/0/rig_info
+
+curl localhost/rigctl_api/trx/0/modes
+
+curl localhost/rigctl_api/trx/0/powerstate
+curl -XPOST localhost/rigctl_api/trx/0/powerstate -d'{"newValue":0}'
+curl -XPOST localhost/rigctl_api/trx/0/powerstate -d'{"newValue":1}'
+
+curl -XPOST localhost/rigctl_api/trx/0/dtmf -d'{"newValue":"324"}'
+
+curl -XPOST localhost/rigctl_api/trx/0/voice_mem -d'{"newValue":2}'
+
+curl -XPOST localhost/rigctl_api/trx/0/twiddle -d'{"newValue":2}'
+
+
+
+
 
 
 

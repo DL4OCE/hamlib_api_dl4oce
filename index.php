@@ -103,12 +103,16 @@ $router->post('/trx/(\d+)/dump_capabilities', function($trx_id) { echo set_trx_d
 
 $router->post('/trx/(\d+)/dump_configuration', function($trx_id) { echo set_trx_dump_configuration($trx_id);});
 
+$router->post('/trx/(\d+)/dump_state', function($trx_id) { echo set_trx_dump_state($trx_id);});
+
 $router->post('/trx/(\d+)/morse', function($trx_id) { echo set_trx_morse(json_decode(getRequestBody(), true), $trx_id);});
 $router->post('/trx/(\d+)/morse_stop', function($trx_id) { echo set_trx_morse_stop(json_decode(getRequestBody(), true), $trx_id);});
 
 $router->get('/trx/(\d+)/ctcss_sql', function($trx_id) { echo get_trx_ctcss_sql($trx_id);});
+$router->post('/trx/(\d+)/ctcss_sql', function($trx_id) { echo set_trx_ctcss_sql(json_decode(getRequestBody(), true), $trx_id);});
 
 $router->get('/trx/(\d+)/dcs_sql', function($trx_id) { echo get_trx_dcs_sql($trx_id);});
+$router->post('/trx/(\d+)/dcs_sql', function($trx_id) { echo set_trx_dcs_sql(json_decode(getRequestBody(), true), $trx_id);});
 
 $router->get('/trx/(\d+)/dtmf', function($trx_id) { echo get_trx_dtmf($trx_id);});
 
@@ -120,6 +124,21 @@ $router->get('/trx/(\d+)/twiddle', function($trx_id) { echo get_trx_twiddle($trx
 
 $router->get('/trx/(\d+)/cache', function($trx_id) { echo get_trx_cache($trx_id);});
 $router->post('/trx/(\d+)/cache', function($trx_id) { echo set_trx_cache(json_decode(getRequestBody(), true), $trx_id);});
+
+$router->get('/trx/(\d+)/rig_info', function($trx_id) { echo get_trx_rig_info($trx_id);});
+
+$router->get('/trx/(\d+)/modes', function($trx_id) { echo get_trx_modes($trx_id);});
+
+$router->get('/trx/(\d+)/powerstate', function($trx_id) { echo get_trx_power_state($trx_id);});
+$router->post('/trx/(\d+)/powerstate', function($trx_id) { echo set_trx_power_state(json_decode(getRequestBody(), true), $trx_id);});
+
+$router->post('/trx/(\d+)/dtmf', function($trx_id) { echo set_trx_dtmf(json_decode(getRequestBody(), true), $trx_id);});
+
+$router->post('/trx/(\d+)/voice_mem', function($trx_id) { echo set_trx_voice_mem(json_decode(getRequestBody(), true), $trx_id);});
+
+$router->post('/trx/(\d+)/twiddle', function($trx_id) { echo set_trx_twiddle(json_decode(getRequestBody(), true), $trx_id);});
+
+
 
 
 $router->run();

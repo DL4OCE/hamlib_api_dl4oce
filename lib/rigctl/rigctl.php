@@ -420,10 +420,24 @@ function get_trx_ctcss_sql(int $trx_id){
     ));
 }
 
+function set_trx_ctcss_sql($requestBody, int $trx_id){
+    $response = poll_trx($trx_id, "set_ctcss_sql " . $requestBody['newValue']) ;
+    build_response(array(
+        "ctcss_sql" => $response
+    ));
+}
+
 function get_trx_dcs_sql(int $trx_id){
     $response = poll_trx($trx_id, "get_dcs_sql");
     build_response(array(
         "dcs_sql" => $response[1]
+    ));
+}
+
+function set_trx_dcs_sql($requestBody, int $trx_id){
+    $response = poll_trx($trx_id, "set_dcs_sql " . $requestBody['newValue']) ;
+    build_response(array(
+        "ctcss_sql" => $response
     ));
 }
 
@@ -468,6 +482,56 @@ function set_trx_cache($requestBody, int $trx_id=0){
         "response" => $response
     ));
 }
+
+function set_trx_dump_state($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "dump_state");
+    build_response(array(
+        "response" => $response
+    ));
+}
+
+function get_trx_rig_info($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "get_rig_info");
+    build_response(array(
+        "response" => $response
+    ));
+}
+
+function get_trx_modes($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "get_modes");
+    build_response(array(
+        "response" => $response
+    ));
+}
+
+function get_trx_power_state(int $trx_id){
+    $response = poll_trx($trx_id, "get_powerstat");
+    build_response(array(
+        "power_state" => $response
+    ));
+}
+
+function set_trx_power_state($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "set_powerstate " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function set_trx_dtmf($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "send_dtmf " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function set_trx_voice_mem($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "send_voice_mem " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function set_trx_twiddle($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "set_twiddle " . $requestBody['newValue']);
+    build_response(array());
+}
+
+
 
 
 
