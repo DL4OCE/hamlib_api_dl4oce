@@ -11,9 +11,18 @@ function poll_trx($trx_id, $command){
     // $syscall = "pwd";
     // $result = exec("echo $({$rigctl_executable} {$command})", $output, $result_code);
     $result = exec("$syscall $command", $output, $result_code);
-    // var_dump($output);
-    // die();
-    return($output);
+    foreach($output as $line){
+        // echo $line."\n";
+        if(preg_match('/.*returning2\((.*)\).*/', $line, $matches)){
+            // echo "\n" . $matches[1] . "\n\n";// $line;
+            $error_code = $matches[1];
+        }
+    }
+    if(isset($error_code)){
+        build_error_response($output, $error_code);
+    } else {
+        return($output);
+    }
 }
 
 function get_trx_frequency(int $trx_id){
@@ -109,11 +118,363 @@ function get_trx_level($level_param, int $trx_id){
     ));
 }
 
+function get_trx_level_list(int $trx_id){
+    $response = poll_trx($trx_id, "l ?");
+    $capabilities = [];
+    foreach(explode(" ", $response[1]) as $capability) array_push($capabilities, $capability);
+    $capabilities = array(
+        "capabilities" => $capabilities
+    );
+    build_response($capabilities);
+}
+
 function set_trx_level($level_param, $requestBody, int $trx_id=0){
     poll_trx($trx_id, "L $level_param " . $requestBody['newValue']);
     build_response(array());
 }
 
+
+function get_trx_function($function_param, int $trx_id){
+    build_response(array(
+        "function" => poll_trx($trx_id, "u $function_param")[1]
+    ));
+}
+
+function get_trx_function_list(int $trx_id){
+    $response = poll_trx($trx_id, "u ?");
+    $capabilities = [];
+    foreach(explode(" ", $response[1]) as $capability) array_push($capabilities, $capability);
+    $capabilities = array(
+        "capabilities" => $capabilities
+    );
+    build_response($capabilities);
+}
+
+function set_trx_function($function_param, $requestBody, int $trx_id=0){
+    poll_trx($trx_id, "U $function_param " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_parameter($parameter, int $trx_id){
+    build_response(array(
+        "function" => poll_trx($trx_id, "p $parameter")[1]
+    ));
+}
+
+function get_trx_parameter_list(int $trx_id){
+    $response = poll_trx($trx_id, "u ?");
+    $capabilities = [];
+    foreach(explode(" ", $response[1]) as $capability) array_push($capabilities, $capability);
+    $capabilities = array(
+        "capabilities" => $capabilities
+    );
+    build_response($capabilities);
+}
+
+function set_trx_parameter($parameter, $requestBody, int $trx_id=0){
+    poll_trx($trx_id, "U $parameter " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_scan($scan_parameter, int $trx_id){
+    build_response(array(
+        "function" => poll_trx($trx_id, "p $scan_parameter")[1]
+    ));
+}
+
+function get_trx_scan_list(int $trx_id){
+    $response = poll_trx($trx_id, "u ?");
+    $capabilities = [];
+    foreach(explode(" ", $response[1]) as $capability) array_push($capabilities, $capability);
+    $capabilities = array(
+        "capabilities" => $capabilities
+    );
+    build_response($capabilities);
+}
+
+function set_trx_scan($scan_parameter, $requestBody, int $trx_id=0){
+    poll_trx($trx_id, "U $scan_parameter " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_transceive($transceive_parameter, int $trx_id){
+    build_response(array(
+        "function" => poll_trx($trx_id, "a $transceive_parameter")[1]
+    ));
+}
+
+function get_trx_transceive_list(int $trx_id){
+    $response = poll_trx($trx_id, "A ?");
+    $capabilities = [];
+    foreach(explode(" ", $response[1]) as $capability) array_push($capabilities, $capability);
+    $capabilities = array(
+        "capabilities" => $capabilities
+    );
+    build_response($capabilities);
+}
+
+function set_trx_transceive($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "U $transceive_parameter " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_repeater_shift(int $trx_id){
+    $response = poll_trx($trx_id, "r");
+    build_response(array(
+        "shift_direction" => $response[1]
+    ));
+}
+
+function set_trx_repeater_shift($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "R " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_repeater_offset(int $trx_id){
+    $response = poll_trx($trx_id, "o");
+    build_response(array(
+        "repeater_offset" => $response[1]
+    ));
+}
+
+function set_trx_repeater_offset($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "O " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_ctcss_tone(int $trx_id){
+    $response = poll_trx($trx_id, "c");
+    build_response(array(
+        "ctcss_tone" => $response[1]
+    ));
+}
+
+function set_trx_ctcss_tone($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "C " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_dcs_tone(int $trx_id){
+    $response = poll_trx($trx_id, "d");
+    build_response(array(
+        "dcs_tone" => $response[1]
+    ));
+}
+
+function set_trx_dcs_tone($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "D " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_vfo(int $trx_id){
+    $response = poll_trx($trx_id, "v");
+    build_response(array(
+        "vfo_name" => $response[1]
+    ));
+}
+
+function set_trx_vfo($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "V " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_ptt(int $trx_id){
+    $response = poll_trx($trx_id, "t");
+    build_response(array(
+        "ptt" => $response[1]
+    ));
+}
+
+function set_trx_ptt($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "T " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_memory(int $trx_id){
+    $response = poll_trx($trx_id, "e");
+    build_response(array(
+        "memory" => $response[1]
+    ));
+}
+
+function set_trx_memory($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "E " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_channel(int $trx_id){
+    $response = poll_trx($trx_id, "h");
+    build_response(array(
+        "channel" => $response[1]
+    ));
+}
+
+function set_trx_channel($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "H " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_info(int $trx_id){
+    $response = poll_trx($trx_id, "_");
+    build_response(array(
+        "info" => $response[1]
+    ));
+}
+
+function get_trx_rit(int $trx_id){
+    $response = poll_trx($trx_id, "j");
+    build_response(array(
+        "rit" => $response[1]
+    ));
+}
+
+function set_trx_rit($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "J " . $requestBody['newValue']);
+    build_response(array());
+}
+
+
+
+function get_trx_xit(int $trx_id){
+    $response = poll_trx($trx_id, "z");
+    build_response(array(
+        "xit" => $response[1]
+    ));
+}
+
+function set_trx_xit($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "Z " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function get_trx_antenna(int $trx_id){
+    $response = poll_trx($trx_id, "y 0");
+    build_response(array(
+        "antennas" => array_slice($response, 1, sizeof($response)-1)
+    ));
+}
+
+function set_trx_antenna($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "Y " . $requestBody['newValue']);
+    build_response(array());
+}
+
+function set_trx_raw_command(int $trx_id){
+    $response = poll_trx($trx_id, "w " . $requestBody['raw_command']);
+    build_response(array(
+        "antennas" => array_slice($response, 1, sizeof($response)-1)
+    ));
+}
+
+function set_trx_raw_command_rx($requestBody, int $trx_id=0){
+    poll_trx($trx_id, "W " . $requestBody['raw_command'] . $requestBody['number_of_expected_rx_bytes'] );
+    build_response(array());
+}
+
+function get_trx_mw_power($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "4 " . $requestBody['power_mW'] . " " . $requestBody['frequency'] . " " . $requestBody['mode'] );
+    build_response(array(
+        "power_factor" => $response[1]
+    ));
+}
+
+function get_trx_power_mw($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "2 " . $requestBody['power_factor'] . " " . $requestBody['frequency'] . " " . $requestBody['mode'] );
+    build_response(array(
+        "power_mw" => $response[1]
+    ));
+}
+
+function set_trx_dump_capabilities(int $trx_id=0){
+    $response = poll_trx($trx_id, "1");
+    build_response(array(
+        "response" => $response
+    ));
+}
+
+function set_trx_dump_configuration(int $trx_id=0){
+    $response = poll_trx($trx_id, "3");
+    build_response(array(
+        "response" => $response
+    ));
+}
+
+function set_trx_morse($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "b " . $requestBody['text']);
+    build_response(array(
+        "response" => $response[1]
+    ));
+}
+
+function set_trx_morse_stop($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "stop_morse ");
+    build_response(array(
+        "response" => $response[1]
+    ));
+}
+
+function get_trx_ctcss_sql(int $trx_id){
+    $response = poll_trx($trx_id, "get_ctcss_sql");
+    build_response(array(
+        "ctcss_sql" => $response[1]
+    ));
+}
+
+function get_trx_dcs_sql(int $trx_id){
+    $response = poll_trx($trx_id, "get_dcs_sql");
+    build_response(array(
+        "dcs_sql" => $response[1]
+    ));
+}
+
+function get_trx_dtmf(int $trx_id){
+    $response = poll_trx($trx_id, "recv_dtmf");
+    build_response(array(
+        "dtmf" => $response[1]
+    ));
+}
+
+function get_trx_morse(int $trx_id){
+    $response = poll_trx($trx_id, "wait_morse");
+    build_response(array(
+        "text " => $response
+    ));
+}
+
+function get_trx_dcd(int $trx_id){
+    $response = poll_trx($trx_id, "get_dcd");
+    build_response(array(
+        "dcd " => $response[1]
+    ));
+}
+
+function get_trx_twiddle(int $trx_id){
+    $response = poll_trx($trx_id, "get_twiddle");
+    build_response(array(
+        "twiddle " => $response[1]
+    ));
+}
+
+function get_trx_cache(int $trx_id){
+    $response = poll_trx($trx_id, "get_cache");
+    build_response(array(
+        "cache " => $response[1]
+    ));
+}
+
+function set_trx_cache($requestBody, int $trx_id=0){
+    $response = poll_trx($trx_id, "set_cache " . $requestBody['newValue']);
+    build_response(array(
+        "response" => $response
+    ));
+}
+
+
+
+
+// $router->get('/trx/(\d+)/function/(\w+)', function($trx_id, $level_param) { echo ($function_param, $trx_id);});
+// $router->post('/trx/(\d+)/function/(\w+)', function($trx_id, $level_param) { echo ($function_param, json_decode(getRequestBody(), true), $trx_id);});
+// $router->get('/trx/(\d+)/function', function($trx_id) { echo ($trx_id);});
 
 
 ?>

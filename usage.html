@@ -1,4 +1,4 @@
-<h1>rigctl, rot   ctl, rigmem, rigsmtr, rigswr API</h1>
+<h1>rigctl, rotctl, rigmem, rigsmtr, rigswr API</h1>
 You may use the following API demo methods:<br>
 
 curl localhost/rigctl_api/trx/0/frequency<br>
@@ -25,8 +25,98 @@ curl localhost/rigctl_api/trx/0/tuning_step
 curl -XPOST localhost/rigctl_api/trx/0/tuning_step -d'{"newValue":5000}'
 curl -XPOST localhost/rigctl_api/trx/0/tuning_step -d'{"newValue":10000}'
 
+curl localhost/rigctl_api/trx/0/level
 curl localhost/rigctl_api/trx/0/level/SQL
 curl -XPOST localhost/rigctl_api/trx/0/level/SQL -d'{"newValue":1}'
+
+curl localhost/rigctl_api/trx/0/function
+curl localhost/rigctl_api/trx/0/function/NB
+curl -XPOST localhost/rigctl_api/trx/0/function/NB -d'{"newValue":1}'
+
+curl localhost/rigctl_api/trx/0/parameter
+curl localhost/rigctl_api/trx/0/parameter/BACKLIGHT
+curl -XPOST localhost/rigctl_api/trx/0/parameter/BACKLIGHT -d'{"newValue":1}'
+
+curl localhost/rigctl_api/trx/0/scan
+curl -XPOST localhost/rigctl_api/trx/0/scan/VFO
+#curl -XPOST localhost/rigctl_api/trx/0/scan/VFO -d'{"newValue":1}'
+
+curl localhost/rigctl_api/trx/0/transceive
+curl localhost/rigctl_api/trx/0/transceive/OFF
+curl -XPOST localhost/rigctl_api/trx/0/transceive -d'{"newValue":"OFF"}'
+
+curl localhost/rigctl_api/trx/0/repeater_shift
+curl -XPOST localhost/rigctl_api/trx/0/repeater_shift -d'{"newValue":"-"}'
+curl -XPOST localhost/rigctl_api/trx/0/repeater_shift -d'{"newValue":"None"}'
+
+curl localhost/rigctl_api/trx/0/repeater_offset
+curl -XPOST localhost/rigctl_api/trx/0/repeater_offset -d'{"newValue":600000}'
+
+curl localhost/rigctl_api/trx/0/ctcss_tone
+curl -XPOST localhost/rigctl_api/trx/0/ctcss_tone -d'{"newValue":885}'
+curl -XPOST localhost/rigctl_api/trx/0/ctcss_tone -d'{"newValue":0}'
+
+curl localhost/rigctl_api/trx/0/dcs_tone
+curl -XPOST localhost/rigctl_api/trx/0/dcs_tone -d'{"newValue":423}'
+curl -XPOST localhost/rigctl_api/trx/0/dcs_tone -d'{"newValue":0}'
+
+curl localhost/rigctl_api/trx/0/vfo
+curl -XPOST localhost/rigctl_api/trx/0/vfo -d'{"newValue":"VFOB"}'
+curl -XPOST localhost/rigctl_api/trx/0/vfo -d'{"newValue":"VFOA"}'
+
+curl localhost/rigctl_api/trx/0/ptt
+curl -XPOST localhost/rigctl_api/trx/0/ptt -d'{"newValue":1}'
+curl -XPOST localhost/rigctl_api/trx/0/ptt -d'{"newValue":0}'
+
+curl localhost/rigctl_api/trx/0/memory
+curl -XPOST localhost/rigctl_api/trx/0/memory -d'{"newValue":1}'
+curl -XPOST localhost/rigctl_api/trx/0/memory -d'{"newValue":0}'
+
+// haven't yet figured out how this works
+curl localhost/rigctl_api/trx/0/channel
+curl -XPOST localhost/rigctl_api/trx/0/channel -d'{"newValue":1}'
+curl -XPOST localhost/rigctl_api/trx/0/channel -d'{"newValue":0}'
+
+curl localhost/rigctl_api/trx/0/info
+
+curl localhost/rigctl_api/trx/0/rit
+curl -XPOST localhost/rigctl_api/trx/0/rit -d'{"newValue":23}'
+curl -XPOST localhost/rigctl_api/trx/0/rit -d'{"newValue":0}'
+
+curl localhost/rigctl_api/trx/0/xit
+curl -XPOST localhost/rigctl_api/trx/0/xit -d'{"newValue":230}'
+curl -XPOST localhost/rigctl_api/trx/0/xit -d'{"newValue":0}'
+
+curl localhost/rigctl_api/trx/0/antenna
+curl -XPOST localhost/rigctl_api/trx/0/antenna -d'{"newValue":"ANT1"}'
+curl -XPOST localhost/rigctl_api/trx/0/antenna -d'{"newValue":"ANT_UNKNOWN"}'
+
+curl -XPOST localhost/rigctl_api/trx/0/raw_command -d'{"raw_command":"test"}'
+curl -XPOST localhost/rigctl_api/trx/0/raw_command_rx -d'{"raw_command":"test", "number_of_expected_rx_bytes":100}'
+
+curl -XPOST localhost/rigctl_api/trx/0/convert_mw_power -d'{"power_mW":100,"frequency":145000000,"mode":"USB"}'
+
+curl -XPOST localhost/rigctl_api/trx/0/convert_power_mw -d'{"power_factor":0.342,"frequency":145000000,"mode":"USB"}'
+
+curl -XPOST localhost/rigctl_api/trx/0/dump_capabilities
+
+curl -XPOST localhost/rigctl_api/trx/0/dump_configuration
+
+curl -XPOST localhost/rigctl_api/trx/0/morse -d'{"text":"test"}'
+curl -XPOST localhost/rigctl_api/trx/0/morse_stop
+
+curl localhost/rigctl_api/trx/0/ctcss_sql
+
+curl localhost/rigctl_api/trx/0/dcs_sql
+
+curl localhost/rigctl_api/trx/0/dtmf
+
+curl localhost/rigctl_api/trx/0/dcd
+
+curl localhost/rigctl_api/trx/0/twiddle
+
+curl localhost/rigctl_api/trx/0/cache
+curl -XPOST localhost/rigctl_api/trx/0/cache -d'{"newValue":500}'
 
 
 
