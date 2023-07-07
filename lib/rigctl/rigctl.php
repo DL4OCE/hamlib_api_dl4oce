@@ -1,31 +1,32 @@
 <?php
 function poll_trx($trx_id, $command){
-    // lookup TRX coordinates (port, speed, ...
-    $rigctl_executable = exec('echo $(whereis rigctl) | awk \'{ print $2 }\'', $output, $result_code);
-    if($GLOBALS["dummy"]==true){
-        $syscall = $rigctl_executable;
-    } else {
-        $syscall = "$rigctl_executable -m " . $GLOBALS["model"] . " -r " . $GLOBALS["device"] . " -s 38400";
-    }
-    echo "$syscall $command\n";
-    // $syscall = "pwd";
-    // $result = exec("echo $({$rigctl_executable} {$command})", $output, $result_code);
-    $result = exec("$syscall $command", $output, $result_code);
-    foreach($output as $line){
-        // echo $line."\n";
-        if(preg_match('/.*returning2\((.*)\).*/', $line, $matches)){
-            // echo "\n" . $matches[1] . "\n\n";// $line;
-            $error_code = $matches[1];
+    global $device_array;
+    $trx_data = $device_array['transceivers'][$trx_id];
+    if(isset($trx_data)){
+        $rigctl_executable = exec('echo $(whereis rigctl) | awk \'{ print $2 }\'', $output, $result_code);
+        if($trx_data['dummy_mode'] == 1){
+            $syscall = $rigctl_executable;
+        } else {
+            $syscall = "$rigctl_executable -m " . $trx_data['rigctl_model'] . " -r " . $trx_data['device'] . " -s 38400";
         }
-    }
-    if(isset($error_code)){
-        build_error_response($output, $error_code);
+        echo "$syscall $command\n";
+        $result = exec("$syscall $command", $output, $result_code);
+        foreach($output as $line){
+            if(preg_match('/.*returning2\((.*)\).*/', $line, $matches)){
+                $error_code = $matches[1];
+            }
+        }
+        if(isset($error_code)){
+            build_error_response_rigctl($output, $error_code, __FUNCTION__);
+        } else {
+            return($output);
+        }   
     } else {
-        return($output);
+        build_error_response("", "RIGCTL-002", "TRX with id=$trx_id not defined", __FUNCTION__);
     }
 }
 
-function get_trx_frequency(int $trx_id){
+function get_trx_frequency(int $trx_id=0){
     build_response(array(
         "freq" => poll_trx($trx_id, "f")[1]
     ));
@@ -385,14 +386,14 @@ function get_trx_power_mw($requestBody, int $trx_id=0){
     ));
 }
 
-function set_trx_dump_capabilities(int $trx_id=0){
+function set_trx_capabilities(int $trx_id=0){
     $response = poll_trx($trx_id, "1");
     build_response(array(
         "response" => $response
     ));
 }
 
-function set_trx_dump_configuration(int $trx_id=0){
+function set_trx_configuration(int $trx_id=0){
     $response = poll_trx($trx_id, "3");
     build_response(array(
         "response" => $response
@@ -483,7 +484,7 @@ function set_trx_cache($requestBody, int $trx_id=0){
     ));
 }
 
-function set_trx_dump_state($requestBody, int $trx_id=0){
+function set_trx_state($requestBody, int $trx_id=0){
     $response = poll_trx($trx_id, "dump_state");
     build_response(array(
         "response" => $response

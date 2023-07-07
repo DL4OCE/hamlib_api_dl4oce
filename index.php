@@ -7,17 +7,24 @@ error_reporting(-1);
 // die($_SERVER['REQUEST_URI']);
 // print_r($_SERVER);
 //require_once('src/Bramus/Router/Router.php');
-require_once "config.php";
+// require_once "config.php";
 require_once "vendor/autoload.php";
 require_once "lib/rigctl/rigctl.php";
+require_once "lib/rotctl/rotctl.php";
 require_once "data/errors_hamlib.php";
 
+$device_array = json_decode(file_get_contents("config.json"), 1);
+//  die("kjh");
+// var_dump($device_array);
+// die();
 
 $router = new \Bramus\Router\Router();
 $router->set404(function() { 
     header('HTTP/1.1 404 Not Found'); 
     echo "Error 404!"; 
 });
+
+// ==== rigctl ====
 
 $router->get('/', function () { echo file_get_contents('usage.html');});
 $router->get('/trx/(\d+)/frequency', function($trx_id) { echo get_trx_frequency($trx_id);});
@@ -99,11 +106,11 @@ $router->post('/trx/(\d+)/convert_mw_power', function($trx_id) { echo get_trx_mw
 
 $router->post('/trx/(\d+)/convert_power_mw', function($trx_id) { echo get_trx_power_mw(json_decode(getRequestBody(), true), $trx_id);});
 
-$router->post('/trx/(\d+)/dump_capabilities', function($trx_id) { echo set_trx_dump_capabilities($trx_id);});
+$router->post('/trx/(\d+)/capabilities', function($trx_id) { echo set_trx_capabilities($trx_id);});
 
-$router->post('/trx/(\d+)/dump_configuration', function($trx_id) { echo set_trx_dump_configuration($trx_id);});
+$router->post('/trx/(\d+)/configuration', function($trx_id) { echo set_trx_configuration($trx_id);});
 
-$router->post('/trx/(\d+)/dump_state', function($trx_id) { echo set_trx_dump_state($trx_id);});
+$router->post('/trx/(\d+)/state', function($trx_id) { echo set_trx_state($trx_id);});
 
 $router->post('/trx/(\d+)/morse', function($trx_id) { echo set_trx_morse(json_decode(getRequestBody(), true), $trx_id);});
 $router->post('/trx/(\d+)/morse_stop', function($trx_id) { echo set_trx_morse_stop(json_decode(getRequestBody(), true), $trx_id);});
@@ -138,7 +145,34 @@ $router->post('/trx/(\d+)/voice_mem', function($trx_id) { echo set_trx_voice_mem
 
 $router->post('/trx/(\d+)/twiddle', function($trx_id) { echo set_trx_twiddle(json_decode(getRequestBody(), true), $trx_id);});
 
+// ==== rotctl ====
 
+$router->get('/rotator/(\d+)/position', function($rotator_id) { echo get_rotator_position($rotator_id);});
+$router->post('/rotator/(\d+)/position', function($rotator_id) { echo set_rotator_position(json_decode(getRequestBody(), true), $rotator_id);});
+
+$router->post('/rotator/(\d+)/park', function($rotator_id) { echo set_rotator_park(json_decode(getRequestBody(), true), $rotator_id);});
+
+$router->post('/rotator/(\d+)/stop', function($rotator_id) { echo set_rotator_stop(json_decode(getRequestBody(), true), $rotator_id);});
+
+$router->post('/rotator/(\d+)/reset', function($rotator_id) { echo set_rotator_reset(json_decode(getRequestBody(), true), $rotator_id);});
+
+$router->post('/rotator/(\d+)/move', function($rotator_id) { echo set_rotator_move(json_decode(getRequestBody(), true), $rotator_id);});
+
+$router->get('/rotator/(\d+)/level/(\w+)', function($rotator_id, $level_param) { echo get_rotator_level($level_param, $rotator_id);});
+$router->post('/rotator/(\d+)/level/(\w+)', function($rotator_id, $level_param) { echo set_rotator_level(json_decode(getRequestBody(), true), $level_param, $rotator_id);});
+
+$router->get('/rotator/(\d+)/function/(\w+)', function($rotator_id, $function_param) { echo get_rotator_level($function_param, $rotator_id);});
+$router->post('/rotator/(\d+)/function/(\w+)', function($rotator_id, $function_param) { echo set_rotator_level(json_decode(getRequestBody(), true), $function_param, $rotator_id);});
+
+$router->get('/rotator/(\d+)/parameter/(\w+)', function($rotator_id, $parameter) { echo get_rotator_parameter($parameter, $rotator_id);});
+$router->post('/rotator/(\d+)/parameter/(\w+)', function($rotator_id, $parameter) { echo set_rotator_parameter(json_decode(getRequestBody(), true), $parameter, $rotator_id);});
+
+$router->get('/rotator/(\d+)/info', function($rotator_id) { echo get_rotator_info($rotator_id);});
+
+$router->get('/rotator/(\d+)/status', function($rotator_id) { echo get_rotator_status($rotator_id);});
+$router->get('/rotator/(\d+)/state', function($rotator_id) { echo get_rotator_state($rotator_id);});
+
+$router->get('/rotator/(\d+)/capabilities', function($rotator_id) { echo get_rotator_capabilities($rotator_id);});
 
 
 $router->run();
@@ -157,7 +191,7 @@ function build_response($response){
     ));
 }
 
-function build_error_response($response, $error_code){
+function build_error_response_rigctl($response, $error_code, $function_name){
     global $errors_hamlib;
     http_response_code(400);
     echo json_encode(array(
@@ -165,10 +199,23 @@ function build_error_response($response, $error_code){
         "REQUEST_BODY" => getRequestBody(),
         "response" => $response,
         "error_code" => $error_code,
-        "error_message" => $errors_hamlib[intval($error_code)]
+        "error_message" => $errors_hamlib[intval($error_code)],
+        "source_function" => $function_name
     ));
     die();
 }
 
-
+function build_error_response($response, $error_code, $error_message, $function_name){
+    global $errors_hamlib;
+    http_response_code(400);
+    echo json_encode(array(
+        "REQUEST_URI" => $_SERVER['REQUEST_URI'],
+        "REQUEST_BODY" => getRequestBody(),
+        "response" => $response,
+        "error_code" => $error_code,
+        "error_message" => $error_message,
+        "source_function" => $function_name
+    ));
+    die();
+}
 ?>

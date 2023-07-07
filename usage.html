@@ -1,6 +1,8 @@
 <h1>rigctl, rotctl, rigmem, rigsmtr, rigswr API</h1>
 You may use the following API demo methods:<br>
 
+// ==== rigctl ====
+
 curl localhost/rigctl_api/trx/0/frequency<br>
 curl -XPOST localhost/rigctl_api/trx/0/frequency -d'{"newValue":"145425000"}'<br>
 
@@ -98,11 +100,11 @@ curl -XPOST localhost/rigctl_api/trx/0/convert_mw_power -d'{"power_mW":100,"freq
 
 curl -XPOST localhost/rigctl_api/trx/0/convert_power_mw -d'{"power_factor":0.342,"frequency":145000000,"mode":"USB"}'
 
-curl -XPOST localhost/rigctl_api/trx/0/dump_capabilities
+curl -XPOST localhost/rigctl_api/trx/0/capabilities
 
-curl -XPOST localhost/rigctl_api/trx/0/dump_configuration
+curl -XPOST localhost/rigctl_api/trx/0/configuration
 
-curl -XPOST localhost/rigctl_api/trx/0/dump_state
+curl -XPOST localhost/rigctl_api/trx/0/state
 
 curl -XPOST localhost/rigctl_api/trx/0/morse -d'{"text":"test"}'
 curl -XPOST localhost/rigctl_api/trx/0/morse_stop
@@ -136,9 +138,42 @@ curl -XPOST localhost/rigctl_api/trx/0/voice_mem -d'{"newValue":2}'
 
 curl -XPOST localhost/rigctl_api/trx/0/twiddle -d'{"newValue":2}'
 
+// ==== rotctl ====
 
+curl localhost/rigctl_api/rotator/0/position
+curl -XPOST localhost/rigctl_api/rotator/0/position -d'{"azimuth":80,"elevation":20}'
+curl -XPOST localhost/rigctl_api/rotator/0/position -d'{"azimuth":36,"elevation":0}'
 
+curl -XPOST localhost/rigctl_api/rotator/0/park
 
+curl -XPOST localhost/rigctl_api/rotator/0/stop
+
+curl -XPOST localhost/rigctl_api/rotator/0/move -d'{"direction":8,"speed":10}'
+curl -XPOST localhost/rigctl_api/rotator/0/move -d'{"direction":16,"speed":20}'
+
+// level = PREAMP, ATT, VOX, AF, RF,  SQL,  IF,  APF,  NR,  PBT_IN,  PBT_OUT, CWPITCH,  RFPOWER, MICGAIN, KEYSPD, NOTCHF, COMP, AGC, BKINDL, BAL, METER, VOXGAIN,
+//     ANTIVOX, SLOPE_LOW, SLOPE_HIGH, RAWSTR, SQLSTAT, SWR, ALC, STRENGTH (whatever is supported by your rig)
+curl localhost/rigctl_api/rotator/0/level/ATT
+curl -XPOST localhost/rigctl_api/rotator/0/level/ATT -d'{"newValue":3}'
+curl -XPOST localhost/rigctl_api/rotator/0/level/ATT -d'{"newValue":0}'
+
+// function = FAGC, NB, COMP, VOX, TONE, TSQL, SBKIN, FBKIN, ANF, NR, AIP, APF, MON, MN, RF, ARO, LOCK, MUTE, VSC, REV, SQL, ABM, BC,  MBC,  AFC,  SATMODE,  SCOPE,
+//     RESUME, TBURST, TUNER (whatever is supported by your rig)
+curl localhost/rigctl_api/rotator/0/function/NB
+curl -XPOST localhost/rigctl_api/rotator/0/function/NB -d'{"newValue":3}'
+curl -XPOST localhost/rigctl_api/rotator/0/function/NB -d'{"newValue":0}'
+
+// parameter = ANN, APO, BACKLIGHT, BEEP, TIME, BAT, KEYLIGHT (whatever is supported by your rig)
+curl localhost/rigctl_api/rotator/0/function/BACKLIGHT
+curl -XPOST localhost/rigctl_api/rotator/0/function/BACKLIGHT -d'{"newValue":1}'
+curl -XPOST localhost/rigctl_api/rotator/0/function/BACKLIGHT -d'{"newValue":0}'
+
+curl localhost/rigctl_api/rotator/0/info
+
+curl localhost/rigctl_api/rotator/0/status
+curl localhost/rigctl_api/rotator/0/state
+
+curl localhost/rigctl_api/rotator/0/capabilities
 
 
 

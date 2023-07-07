@@ -1,0 +1,23 @@
+{ 
+    "transceivers": [
+        {
+            "id": 0,
+            "manufacturer": "YAESU",
+            "model": "FT-817ND",
+            "rigctl_model": 1020,
+            "device": "/dev/ttyUSB0",
+            "dummy_mode": 0
+        }
+    ],
+    "rotators": [
+        {
+            "id": 0,
+            "manufacturer": "Yaesu",
+            "model": "GS-232A",
+            "rotctl_model": 601,
+            "device": "/dev/ttyUSB1",
+            "dummy_mode": 0
+        }
+    ]
+
+}
