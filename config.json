@@ -6,6 +6,17 @@
             "model": "FT-817ND",
             "rigctl_model": 1020,
             "device": "/dev/ttyUSB0",
+            "serial_speed": 38400,
+            "dummy_mode": 0
+        },
+        {
+            "id": 1,
+            "manufacturer": "Icom",
+            "model": "IC-7600",
+            "rigctl_model": 3063,
+            "device": "/dev/ttyS0",
+            "serial_speed": 19200,
+            "civaddr": "7A",
             "dummy_mode": 0
         }
     ],

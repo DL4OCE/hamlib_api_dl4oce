@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <office:document xmlns:presentation="urn:oasis:names:tc:opendocument:xmlns:presentation:1.0" xmlns:css3t="http://www.w3.org/TR/css3-text/" xmlns:grddl="http://www.w3.org/2003/g/data-view#" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:config="urn:oasis:names:tc:opendocument:xmlns:config:1.0" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:drawooo="http://openoffice.org/2010/draw" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:calcext="urn:org:documentfoundation:names:experimental:calc:xmlns:calcext:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:tableooo="http://openoffice.org/2009/table" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:rpt="http://openoffice.org/2005/report" xmlns:formx="urn:openoffice:names:experimental:ooxml-odf-interop:xmlns:form:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:field="urn:openoffice:names:experimental:ooo-ms-interop:xmlns:field:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:loext="urn:org:documentfoundation:names:experimental:office:xmlns:loext:1.0" office:version="1.3" office:mimetype="application/vnd.oasis.opendocument.spreadsheet">
- <office:meta><meta:creation-date>2023-06-23T07:59:39.817216977</meta:creation-date><dc:date>2023-07-07T12:00:24.033733190</dc:date><meta:editing-duration>PT17H50M56S</meta:editing-duration><meta:editing-cycles>64</meta:editing-cycles><meta:generator>LibreOffice/7.5.3.2$Linux_X86_64 LibreOffice_project/9f56dff12ba03b9acd7730a5a481eea045e468f3</meta:generator><meta:document-statistic meta:table-count="2" meta:cell-count="528" meta:object-count="0"/></office:meta>
+ <office:meta><meta:creation-date>2023-06-23T07:59:39.817216977</meta:creation-date><dc:date>2023-07-15T06:17:49.021179266</dc:date><meta:editing-duration>PT17H51M3S</meta:editing-duration><meta:editing-cycles>65</meta:editing-cycles><meta:generator>LibreOffice/7.5.3.2$Linux_X86_64 LibreOffice_project/9f56dff12ba03b9acd7730a5a481eea045e468f3</meta:generator><meta:document-statistic meta:table-count="3" meta:cell-count="528" meta:object-count="0"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
    <config:config-item config:name="VisibleAreaTop" config:type="int">1355</config:config-item>
    <config:config-item config:name="VisibleAreaLeft" config:type="int">0</config:config-item>
    <config:config-item config:name="VisibleAreaWidth" config:type="int">12898</config:config-item>
-   <config:config-item config:name="VisibleAreaHeight" config:type="int">12643</config:config-item>
+   <config:config-item config:name="VisibleAreaHeight" config:type="int">13423</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view1</config:config-item>
      <config:config-item-map-named config:name="Tables">
+      <config:config-item-map-entry config:name="ampctl">
+       <config:config-item config:name="CursorPositionX" config:type="int">0</config:config-item>
+       <config:config-item config:name="CursorPositionY" config:type="int">0</config:config-item>
+       <config:config-item config:name="ActiveSplitRange" config:type="short">2</config:config-item>
+       <config:config-item config:name="PositionLeft" config:type="int">0</config:config-item>
+       <config:config-item config:name="PositionRight" config:type="int">0</config:config-item>
+       <config:config-item config:name="PositionTop" config:type="int">0</config:config-item>
+       <config:config-item config:name="PositionBottom" config:type="int">0</config:config-item>
+       <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
+       <config:config-item config:name="ZoomValue" config:type="int">120</config:config-item>
+       <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
+       <config:config-item config:name="ShowGrid" config:type="boolean">true</config:config-item>
+       <config:config-item config:name="AnchoredTextOverflowLegacy" config:type="boolean">false</config:config-item>
+       <config:config-item config:name="LegacySingleLineFontwork" config:type="boolean">false</config:config-item>
+       <config:config-item config:name="ConnectorUseSnapRect" config:type="boolean">false</config:config-item>
+      </config:config-item-map-entry>
       <config:config-item-map-entry config:name="rigctl">
        <config:config-item config:name="CursorPositionX" config:type="int">3</config:config-item>
        <config:config-item config:name="CursorPositionY" config:type="int">33</config:config-item>
@@ -45,8 +61,8 @@
        <config:config-item config:name="ConnectorUseSnapRect" config:type="boolean">false</config:config-item>
       </config:config-item-map-entry>
      </config:config-item-map-named>
-     <config:config-item config:name="ActiveTable" config:type="string">rotctl</config:config-item>
-     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">539</config:config-item>
+     <config:config-item config:name="ActiveTable" config:type="string">ampctl</config:config-item>
+     <config:config-item config:name="HorizontalScrollbarWidth" config:type="int">1004</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
      <config:config-item config:name="ZoomValue" config:type="int">120</config:config-item>
      <config:config-item config:name="PageViewZoomValue" config:type="int">60</config:config-item>
@@ -112,7 +128,7 @@
    <config:config-item config:name="LoadReadonly" config:type="boolean">false</config:config-item>
    <config:config-item config:name="PrinterName" config:type="string">Hewlett-Packard_HP_Color_LaserJet_MFP_M277dw</config:config-item>
    <config:config-item config:name="PrinterPaperFromSetup" config:type="boolean">false</config:config-item>
-   <config:config-item config:name="PrinterSetup" config:type="base64Binary">XQL+/0hld2xldHQtUGFja2FyZF9IUF9Db2xvcl9MYXNlckpldF9NRlBfTTI3N2R3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ1VQUzpIZXdsZXR0LVBhY2thcmRfSFBfQ29sb3JfTAAWAAMAAgEAAAAAAAAEAAhSAAAEdAAASm9iRGF0YSAxCnByaW50ZXI9SGV3bGV0dC1QYWNrYXJkX0hQX0NvbG9yX0xhc2VySmV0X01GUF9NMjc3ZHcKb3JpZW50YXRpb249UG9ydHJhaXQKY29waWVzPTEKY29sbGF0ZT1mYWxzZQptYXJnaW5hZGp1c3RtZW50PTAsMCwwLDAKY29sb3JkZXB0aD0yNApwc2xldmVsPTAKcGRmZGV2aWNlPTEKY29sb3JkZXZpY2U9MApQUERDb250ZXh0RGF0YQpDb2xvck1vZGVsOkRldmljZVJHQgBQYWdlU2l6ZTpBNABJbnB1dFNsb3Q6QXV0bwBEdXBsZXg6Tm9uZQAAEgBDT01QQVRfRFVQTEVYX01PREUPAER1cGxleE1vZGU6Ok9mZgwAUFJJTlRFUl9OQU1FLABIZXdsZXR0LVBhY2thcmRfSFBfQ29sb3JfTGFzZXJKZXRfTUZQX00yNzdkdwsARFJJVkVSX05BTUUxAENVUFM6SGV3bGV0dC1QYWNrYXJkX0hQX0NvbG9yX0xhc2VySmV0X01GUF9NMjc3ZHc=</config:config-item>
+   <config:config-item config:name="PrinterSetup" config:type="base64Binary">XQL+/0hld2xldHQtUGFja2FyZF9IUF9Db2xvcl9MYXNlckpldF9NRlBfTTI3N2R3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ1VQUzpIZXdsZXR0LVBhY2thcmRfSFBfQ29sb3JfTAAWAAMAAgEAAAAAAAAEAAhSAAAEdAAASm9iRGF0YSAxCnByaW50ZXI9SGV3bGV0dC1QYWNrYXJkX0hQX0NvbG9yX0xhc2VySmV0X01GUF9NMjc3ZHcKb3JpZW50YXRpb249UG9ydHJhaXQKY29waWVzPTEKY29sbGF0ZT1mYWxzZQptYXJnaW5hZGp1c3RtZW50PTAsMCwwLDAKY29sb3JkZXB0aD0yNApwc2xldmVsPTAKcGRmZGV2aWNlPTEKY29sb3JkZXZpY2U9MApQUERDb250ZXh0RGF0YQpEdXBsZXg6Tm9uZQBJbnB1dFNsb3Q6QXV0bwBQYWdlU2l6ZTpBNABDb2xvck1vZGVsOkRldmljZVJHQgAAEgBDT01QQVRfRFVQTEVYX01PREUPAER1cGxleE1vZGU6Ok9mZgwAUFJJTlRFUl9OQU1FLABIZXdsZXR0LVBhY2thcmRfSFBfQ29sb3JfTGFzZXJKZXRfTUZQX00yNzdkdwsARFJJVkVSX05BTUUxAENVUFM6SGV3bGV0dC1QYWNrYXJkX0hQX0NvbG9yX0xhc2VySmV0X01GUF9NMjc3ZHc=</config:config-item>
    <config:config-item config:name="RasterIsVisible" config:type="boolean">false</config:config-item>
    <config:config-item config:name="RasterResolutionX" config:type="int">1000</config:config-item>
    <config:config-item config:name="RasterResolutionY" config:type="int">1000</config:config-item>
@@ -132,6 +148,9 @@
     </config:config-item-map-entry>
     <config:config-item-map-entry config:name="rotctl">
      <config:config-item config:name="CodeName" config:type="string">rotctl</config:config-item>
+    </config:config-item-map-entry>
+    <config:config-item-map-entry config:name="ampctl">
+     <config:config-item config:name="CodeName" config:type="string">Tabelle3</config:config-item>
     </config:config-item-map-entry>
    </config:config-item-map-named>
   </config:config-item-set>
@@ -370,7 +389,7 @@
      <text:p><text:sheet-name>???</text:sheet-name><text:s/>(<text:title>???</text:title>)</text:p>
     </style:region-left>
     <style:region-right>
-     <text:p><text:date style:data-style-name="N2" text:date-value="2023-07-07">00.00.0000</text:date>, <text:time style:data-style-name="N2" text:time-value="10:24:09.977617664">00:00:00</text:time></text:p>
+     <text:p><text:date style:data-style-name="N2" text:date-value="2023-07-15">00.00.0000</text:date>, <text:time style:data-style-name="N2" text:time-value="06:17:41.343504827">00:00:00</text:time></text:p>
     </style:region-right>
    </style:header>
    <style:header-left style:display="false"/>
@@ -2397,7 +2416,7 @@
       <text:p>(Dec Degrees) </text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>implement</text:p>
      </table:table-cell>
@@ -2411,7 +2430,7 @@
       <text:p>(Degrees, Dec Minutes, S/W) </text:p>
      </table:table-cell>
     </table:table-row>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro2">
      <table:table-cell table:style-name="ce11" office:value-type="string" calcext:value-type="string">
       <text:p>implement</text:p>
      </table:table-cell>
@@ -2490,6 +2509,12 @@
       <calcext:condition calcext:apply-style-name="api_implement" calcext:value="=implement" calcext:base-cell-address="rotctl.A4"/>
      </calcext:conditional-format>
     </calcext:conditional-formats>
+   </table:table>
+   <table:table table:name="ampctl" table:style-name="ta1">
+    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell/>
+    </table:table-row>
    </table:table>
    <table:named-expressions/>
   </office:spreadsheet>

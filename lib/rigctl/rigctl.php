@@ -7,7 +7,9 @@ function poll_trx($trx_id, $command){
         if($trx_data['dummy_mode'] == 1){
             $syscall = $rigctl_executable;
         } else {
-            $syscall = "$rigctl_executable -m " . $trx_data['rigctl_model'] . " -r " . $trx_data['device'] . " -s 38400";
+            $syscall = "$rigctl_executable -m " . $trx_data['rigctl_model'] . " -r " . $trx_data['device'];
+            if(isset($trx_data['serial_speed'])) $syscall .= " -s " . $trx_data['serial_speed'];
+            if(isset($trx_data['civaddr'])) $syscall .= " -c " . $trx_data['civaddr'];
         }
         echo "$syscall $command\n";
         $result = exec("$syscall $command", $output, $result_code);

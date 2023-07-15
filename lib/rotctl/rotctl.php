@@ -10,7 +10,8 @@ function poll_rotator($rotator_id, $command){
             $syscall = $rigctl_executable;
         } else {
             // $syscall = "$rigctl_executable -m " . $GLOBALS["model"] . " -r " . $GLOBALS["device"] . " -s 38400";
-            $syscall = "$rigctl_executable -m " . $rotator_data['rotctl_model'] . " -r " . $rotator_data['device'] . " -s 38400";
+            $syscall = "$rigctl_executable -m " . $rotator_data['rotctl_model'] . " -r " . $rotator_data['device'];
+            if(isset($rotator_data['serial_speed'])) $syscall .= " -s " . $rotator_data['serial_speed'];
         }
         echo "$syscall $command\n";
         // $syscall = "pwd";
