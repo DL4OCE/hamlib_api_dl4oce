@@ -1,4 +1,7 @@
 <?php
+// hamlib API
+// 20230717: initial version by Arne, DL4OCE   ..._._
+// 
 
 function poll_rotator($rotator_id, $command){
     global $device_array;
