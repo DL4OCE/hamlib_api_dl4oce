@@ -12,4 +12,10 @@ ldconfig
 mkdir /var/www/html/hamlib_api/
 git clone https://github.com/DL4OCE/hamlib_api_dl4oce.git /var/www/html/hamlib_api/
 a2enmod rewrite
+echo "<Directory /var/www/html/hamlib_api>
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+</Directory>" > /etc/apache2/sites-available/hamlib_api.conf
+ln -s /etc/apache2/sites-available/hamlib_api.conf /etc/apache2/sites-enabled/hamlib_api.conf
 systemctl restart apache2
