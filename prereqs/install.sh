@@ -18,4 +18,5 @@ echo "<Directory /var/www/html/hamlib_api>
         Require all granted
 </Directory>" > /etc/apache2/sites-available/hamlib_api.conf
 ln -s /etc/apache2/sites-available/hamlib_api.conf /etc/apache2/sites-enabled/hamlib_api.conf
+addgroup www-data dialout
 systemctl restart apache2
