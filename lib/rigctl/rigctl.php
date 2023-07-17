@@ -1,4 +1,8 @@
 <?php
+// hamlib API
+// 20230717: initial version by Arne, DL4OCE   ..._._
+// 
+
 function poll_trx($trx_id, $command){
     global $device_array;
     $trx_data = $device_array['transceivers'][$trx_id];
