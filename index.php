@@ -1,4 +1,9 @@
-<?php 
+<?php
+
+// hamlib API
+// 20230717: initial version by Arne, DL4OCE   ..._._
+// 
+
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 'On');
 ini_set('display_startup_errors', 1);
@@ -14,9 +19,6 @@ require_once "lib/rotctl/rotctl.php";
 require_once "data/errors_hamlib.php";
 
 $device_array = json_decode(file_get_contents("config.json"), 1);
-//  die("kjh");
-// var_dump($device_array);
-// die();
 
 $router = new \Bramus\Router\Router();
 $router->set404(function() { 
