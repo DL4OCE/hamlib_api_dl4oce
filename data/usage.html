@@ -1,0 +1,205 @@
+<h1>rigctl, rotctl, rigmem, rigsmtr, rigswr API</h1>
+You may use the following API demo methods:<br>
+
+// ==== rigctl ====
+
+curl localhost/hamlib_api_dl4oce/<br>
+
+curl localhost/hamlib_api_dl4oce/trx/0<br>
+curl localhost/hamlib_api_dl4oce/trx/1<br>
+curl localhost/hamlib_api_dl4oce/trx/all<br>
+
+curl -XDELETE localhost/hamlib_api_dl4oce/trx/0
+curl -XDELETE localhost/hamlib_api_dl4oce/trx/1
+curl -XDELETE localhost/hamlib_api_dl4oce/trx/2
+curl -XDELETE localhost/hamlib_api_dl4oce/trx/3
+curl -XDELETE localhost/hamlib_api_dl4oce/trx/all
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx -d'{"rigctl_model":"1020","device":"/dev/ttyUSB0","serial_speed_baud":38400,"dummy_mode":0}'<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx -d'{"rigctl_model":"3063","device":"/dev/ttyUSB1","serial_speed_baud":19200,"civ_address_hex":"7A","dummy_mode":1}'<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx -d'{"rigctl_model":"3081","device":"/dev/ttyUSB2","serial_speed_baud":19200,"civ_address_hex":"7A","dummy_mode":0}'<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx/all -d'[{"rigctl_model":1020,"device":"\/dev\/ttyUSB0","serial_speed":38400,"dummy_mode":0},{"rigctl_model":3063,"device":"\/dev\/ttyUSB1","serial_speed":19200,"civ_address_hex":"7A","dummy_mode":1},{"rigctl_model":3081,"device":"\/dev\/ttyUSB2","serial_speed":115200,"civ_address_hex":"7A","dummy_mode":0}]'<br>
+
+curl -XPUT localhost/hamlib_api_dl4oce/trx/0 -d'{"rigctl_model":"1020","device":"/dev/ttyUSB0","serial_speed_baud":38400,"dummy_mode":0}'<br>
+curl -XPUT localhost/hamlib_api_dl4oce/trx/0 -d'{"rigctl_model":"1020","device":"/dev/ttyUSB1","serial_speed_baud":38400,"dummy_mode":0}'<br>
+
+curl localhost/hamlib_api_dl4oce/trx/0/frequency<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/frequency -d'{"newValue":"145425000"}'<br>
+
+
+curl localhost/hamlib_api_dl4oce/trx/0/frequency<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/frequency -d'{"newValue":"145425000"}'<br>
+
+curl localhost/hamlib_api_dl4oce/trx/0/mode<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/mode -d'{"mode":"FM","passband":9000}'<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/mode -d'{"mode":"USB","passband":2400}'<br>
+
+curl localhost/hamlib_api_dl4oce/trx/0/split_frequency
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/split_frequency -d'{"newValue":145725100}'<br>
+
+curl localhost/hamlib_api_dl4oce/trx/0/split_mode
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/split_mode -d'{"mode":"FM","passband":9000}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/split_frequency_mode
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/split_frequency_mode -d'{"frequency":145425300, "mode":"FM","passband":9000}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/split_vfo
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/split_vfo -d'{"split_mode":1,"tx_vfo":"VFOA"}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/split_vfo -d'{"split_mode":0,"tx_vfo":"VFOA"}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/tuning_step
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/tuning_step -d'{"newValue":5000}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/tuning_step -d'{"newValue":10000}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/level
+curl localhost/hamlib_api_dl4oce/trx/0/level/SQL
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/level/SQL -d'{"newValue":1}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/function
+curl localhost/hamlib_api_dl4oce/trx/0/function/NB
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/function/NB -d'{"newValue":1}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/parameter
+curl localhost/hamlib_api_dl4oce/trx/0/parameter/BACKLIGHT
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/parameter/BACKLIGHT -d'{"newValue":1}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/scan
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/scan/VFO
+#curl -XPOST localhost/hamlib_api_dl4oce/trx/0/scan/VFO -d'{"newValue":1}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/transceive
+curl localhost/hamlib_api_dl4oce/trx/0/transceive/OFF
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/transceive -d'{"newValue":"OFF"}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/repeater_shift
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/repeater_shift -d'{"newValue":"-"}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/repeater_shift -d'{"newValue":"None"}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/repeater_offset
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/repeater_offset -d'{"newValue":600000}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/ctcss_tone
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/ctcss_tone -d'{"newValue":885}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/ctcss_tone -d'{"newValue":0}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/dcs_tone
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/dcs_tone -d'{"newValue":423}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/dcs_tone -d'{"newValue":0}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/vfo
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/vfo -d'{"newValue":"VFOB"}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/vfo -d'{"newValue":"VFOA"}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/ptt
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/ptt -d'{"newValue":1}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/ptt -d'{"newValue":0}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/memory
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/memory -d'{"newValue":1}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/memory -d'{"newValue":0}'
+
+// haven't yet figured out how this works
+curl localhost/hamlib_api_dl4oce/trx/0/channel
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/channel -d'{"newValue":1}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/channel -d'{"newValue":0}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/info
+
+curl localhost/hamlib_api_dl4oce/trx/0/rit
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/rit -d'{"newValue":23}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/rit -d'{"newValue":0}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/xit
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/xit -d'{"newValue":230}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/xit -d'{"newValue":0}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/antenna
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/antenna -d'{"newValue":"ANT1"}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/antenna -d'{"newValue":"ANT_UNKNOWN"}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/raw_command -d'{"raw_command":"test"}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/raw_command_rx -d'{"raw_command":"test", "number_of_expected_rx_bytes":100}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/convert_mw_power -d'{"power_mW":100,"frequency":145000000,"mode":"USB"}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/convert_power_mw -d'{"power_factor":0.342,"frequency":145000000,"mode":"USB"}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/capabilities
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/configuration
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/state
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/morse -d'{"text":"test"}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/morse_stop
+
+curl localhost/hamlib_api_dl4oce/trx/0/ctcss_sql
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/ctcss_sql -d'{"newValue":885}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/dcs_sql
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/dcs_sql -d'{"newValue":4}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/dtmf
+
+curl localhost/hamlib_api_dl4oce/trx/0/dcd
+
+curl localhost/hamlib_api_dl4oce/trx/0/twiddle
+
+curl localhost/hamlib_api_dl4oce/trx/0/cache
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/cache -d'{"newValue":500}'
+
+curl localhost/hamlib_api_dl4oce/trx/0/rig_info
+
+curl localhost/hamlib_api_dl4oce/trx/0/modes
+
+curl localhost/hamlib_api_dl4oce/trx/0/powerstate
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/powerstate -d'{"newValue":0}'
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/powerstate -d'{"newValue":1}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/dtmf -d'{"newValue":"324"}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/voice_mem -d'{"newValue":2}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/trx/0/twiddle -d'{"newValue":2}'
+
+// ==== rotctl ====
+
+curl localhost/hamlib_api_dl4oce/rotator/0/position
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/position -d'{"azimuth":80,"elevation":20}'
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/position -d'{"azimuth":36,"elevation":0}'
+
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/park
+
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/stop
+
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/move -d'{"direction":8,"speed":10}'
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/move -d'{"direction":16,"speed":20}'
+
+// level = PREAMP, ATT, VOX, AF, RF,  SQL,  IF,  APF,  NR,  PBT_IN,  PBT_OUT, CWPITCH,  RFPOWER, MICGAIN, KEYSPD, NOTCHF, COMP, AGC, BKINDL, BAL, METER, VOXGAIN,
+//     ANTIVOX, SLOPE_LOW, SLOPE_HIGH, RAWSTR, SQLSTAT, SWR, ALC, STRENGTH (whatever is supported by your rig)
+curl localhost/hamlib_api_dl4oce/rotator/0/level/ATT
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/level/ATT -d'{"newValue":3}'
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/level/ATT -d'{"newValue":0}'
+
+// function = FAGC, NB, COMP, VOX, TONE, TSQL, SBKIN, FBKIN, ANF, NR, AIP, APF, MON, MN, RF, ARO, LOCK, MUTE, VSC, REV, SQL, ABM, BC,  MBC,  AFC,  SATMODE,  SCOPE,
+//     RESUME, TBURST, TUNER (whatever is supported by your rig)
+curl localhost/hamlib_api_dl4oce/rotator/0/function/NB
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/function/NB -d'{"newValue":3}'
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/function/NB -d'{"newValue":0}'
+
+// parameter = ANN, APO, BACKLIGHT, BEEP, TIME, BAT, KEYLIGHT (whatever is supported by your rig)
+curl localhost/hamlib_api_dl4oce/rotator/0/function/BACKLIGHT
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/function/BACKLIGHT -d'{"newValue":1}'
+curl -XPOST localhost/hamlib_api_dl4oce/rotator/0/function/BACKLIGHT -d'{"newValue":0}'
+
+curl localhost/hamlib_api_dl4oce/rotator/0/info
+
+curl localhost/hamlib_api_dl4oce/rotator/0/status
+curl localhost/hamlib_api_dl4oce/rotator/0/state
+
+curl localhost/hamlib_api_dl4oce/rotator/0/capabilities
+
+
+
+<br><br>
+Have a look at the <a href="https://github.com/DL4OCE/hamlib_api_dl4oce">hamlib_api_dl4oce git repository</a> for source code and documentation!

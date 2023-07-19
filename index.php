@@ -18,7 +18,7 @@ require_once "lib/rigctl/rigctl.php";
 require_once "lib/rotctl/rotctl.php";
 require_once "data/errors_hamlib.php";
 
-$device_array = json_decode(file_get_contents("config.json"), 1);
+$device_array = json_decode(file_get_contents("data/config.json"), 1);
 
 $router = new \Bramus\Router\Router();
 $router->set404(function() { 
@@ -28,7 +28,16 @@ $router->set404(function() {
 
 // ==== rigctl ====
 
-$router->get('/', function () { echo file_get_contents('usage.html');});
+$router->get('/', function () { echo file_get_contents('data/usage.html');});
+
+$router->get('/trx/(\d+)', function($trx_id) { echo get_trx_configuration($trx_id);});
+$router->get('/trx/all', function() { echo get_trx_configuration("all");});
+$router->delete('/trx/(\d+)', function($trx_id) { echo delete_trx_configuration($trx_id);});
+$router->delete('/trx/all', function() { echo delete_trx_configuration("all");});
+$router->post('/trx', function() { echo add_trx_configuration(json_decode(getRequestBody(), true));});
+$router->post('/trx/all', function() { echo set_all_trx_configurations(json_decode(getRequestBody(), true));});
+$router->put('/trx/(\d+)', function($trx_id) { echo update_trx_configuration(json_decode(getRequestBody(), true), $trx_id);});
+
 $router->get('/trx/(\d+)/frequency', function($trx_id) { echo get_trx_frequency($trx_id);});
 $router->post('/trx/(\d+)/frequency', function($trx_id) { echo set_trx_frequency(json_decode(getRequestBody(), true), $trx_id);});
 $router->get('/trx/(\d+)/mode', function($trx_id) { echo get_trx_mode($trx_id);});
