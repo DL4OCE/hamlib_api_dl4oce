@@ -70,7 +70,8 @@ function delete_trx_configuration($trx_id){
         // var_dump($device_array);
         // return(json_encode($device_array['transceivers']));
         file_put_contents("data/config.json", json_encode($device_array, JSON_PRETTY_PRINT));
-    } else build_error_response("", "RIGCTL-002", "TRX with id=$trx_id not defined", __FUNCTION__);    
+    } else build_error_response("", "RIGCTL-002", "TRX with id=$trx_id not defined", __FUNCTION__);
+    sync_rigctl_instances();
 }
 
 function add_trx_configuration($requestBody){
@@ -83,18 +84,6 @@ function add_trx_configuration($requestBody){
         $found_maximum++;
     }
     $rigctl_executable = exec('echo $(whereis rigctl) | awk \'{ print $2 }\'', $output, $result_code);
-
-    // echo exec("$rigctl_executable -l | grep ".$requestBody['rigctl_model']." | awk '{ print $2 }'", $output, $result_code);
-// die();
-    // $shell_command = "$rigctl_executable -l | grep ".$requestBody['rigctl_model']." | awk '{ print $3 }'";
-    // echo $shell_command."\n"; 
-    // $result = exec($shell_command, $output, $result_code);
-// var_dump($result);die();
-    // echo "found maximum: $found_maximum\n";
-    // if(isset($device_array['transceivers'])){
-    //     echo "transceivers: " . sizeof($device_array['transceivers']) . "\n";
-    // }
-    // if(sizeof($device_array['transceivers'])>0) $found_maximum++;
     $device_array['transceivers'][] = [
         "id" => $found_maximum,
         "manufacturer" => exec("$rigctl_executable -l | grep ".$requestBody['rigctl_model']." | awk '{ print $2 }'", $output, $result_code),
@@ -105,9 +94,8 @@ function add_trx_configuration($requestBody){
         "civ_address_hex" => $requestBody['civ_address_hex'],
         "dummy_mode" => $requestBody['dummy_mode']
     ];
-    // var_dump($device_array);
-    // echo json_encode($device_array, JSON_PRETTY_PRINT);
     file_put_contents("data/config.json", json_encode($device_array, JSON_PRETTY_PRINT));
+    sync_rigctl_instances();
     build_response(array(
         "id" => $found_maximum
     ));
@@ -123,14 +111,12 @@ function set_all_trx_configurations($requestBody){
         $device_array['transceivers'][$index]['manufacturer'] = exec("$rigctl_executable -l | grep " . $device_array['transceivers'][$index]['rigctl_model'] . " | awk '{ print $2 }'", $output, $result_code);
         $device_array['transceivers'][$index]['model'] = exec("$rigctl_executable -l | grep " . $device_array['transceivers'][$index]['rigctl_model'] . " | awk '{ print $3 }'", $output, $result_code);
     }
-    // var_dump($device_array);
     file_put_contents("data/config.json", json_encode($device_array, JSON_PRETTY_PRINT));
+    sync_rigctl_instances();
 }
 
 function update_trx_configuration($requestBody, $trx_id){
     global $device_array;
-    // var_dump($requestBody);
-// var_dump($device_array);
     $rigctl_executable = exec('echo $(whereis rigctl) | awk \'{ print $2 }\'', $output, $result_code);
     foreach($device_array['transceivers'] as $index => $transceiver){
         if($transceiver['id'] == $trx_id){
@@ -140,8 +126,26 @@ function update_trx_configuration($requestBody, $trx_id){
             $device_array['transceivers'][$index]['model'] = exec("$rigctl_executable -l | grep " . $device_array['transceivers'][$index]['rigctl_model'] . " | awk '{ print $3 }'", $output, $result_code);
         }
     }
-// var_dump($device_array);
     file_put_contents("data/config.json", json_encode($device_array, JSON_PRETTY_PRINT));
+    sync_rigctl_instances();
+}
+
+function sync_rigctl_instances(){
+    global $device_array;
+    $rigctld_executable = exec('echo $(whereis rigctld) | awk \'{ print $3 }\'', $output, $result_code);
+    exec("killall -9 rigctld", $output, $result_code);
+    $port_offset = 0;
+    foreach($device_array['transceivers'] as $index => $transceiver){
+        if($transceiver['dummy_mode'] == 1){
+            $syscall = $rigctld_executable;
+        } else {
+            $syscall = "$rigctld_executable -m " . $transceiver['rigctl_model'] . " -r " . $transceiver['device'];
+            if(isset($transceiver['serial_speed_baud'])) $syscall .= " -s " . $transceiver['serial_speed_baud'];
+            if(isset($transceiver['civ_address_hex'])) $syscall .= " -c " . $transceiver['civ_address_hex'];
+        }
+        echo exec($syscall . " -t " . strval(4532+$port_offset) . " > /dev/null &", $output, $result_code);
+        $port_offset++;
+    }
 }
 
 function get_trx_frequency(int $trx_id=0){

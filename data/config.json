@@ -22,7 +22,7 @@
         {
             "rigctl_model": 3063,
             "device": "\/dev\/ttyUSB1",
-            "serial_speed": 19200,
+            "serial_speed_baud": 19200,
             "civ_address_hex": "7A",
             "dummy_mode": 1,
             "id": 1,
@@ -32,7 +32,7 @@
         {
             "rigctl_model": 3081,
             "device": "\/dev\/ttyUSB2",
-            "serial_speed": 19200,
+            "serial_speed_baud": 19200,
             "civ_address_hex": "7A",
             "dummy_mode": 0,
             "id": 2,

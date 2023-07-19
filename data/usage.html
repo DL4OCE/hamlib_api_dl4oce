@@ -18,7 +18,7 @@ curl -XDELETE localhost/hamlib_api_dl4oce/trx/all
 curl -XPOST localhost/hamlib_api_dl4oce/trx -d'{"rigctl_model":"1020","device":"/dev/ttyUSB0","serial_speed_baud":38400,"dummy_mode":0}'<br>
 curl -XPOST localhost/hamlib_api_dl4oce/trx -d'{"rigctl_model":"3063","device":"/dev/ttyUSB1","serial_speed_baud":19200,"civ_address_hex":"7A","dummy_mode":1}'<br>
 curl -XPOST localhost/hamlib_api_dl4oce/trx -d'{"rigctl_model":"3081","device":"/dev/ttyUSB2","serial_speed_baud":19200,"civ_address_hex":"7A","dummy_mode":0}'<br>
-curl -XPOST localhost/hamlib_api_dl4oce/trx/all -d'[{"rigctl_model":1020,"device":"\/dev\/ttyUSB0","serial_speed":38400,"dummy_mode":0},{"rigctl_model":3063,"device":"\/dev\/ttyUSB1","serial_speed":19200,"civ_address_hex":"7A","dummy_mode":1},{"rigctl_model":3081,"device":"\/dev\/ttyUSB2","serial_speed":115200,"civ_address_hex":"7A","dummy_mode":0}]'<br>
+curl -XPOST localhost/hamlib_api_dl4oce/trx/all -d'[{"rigctl_model":1020,"device":"\/dev\/ttyUSB0","serial_speed_baud":38400,"dummy_mode":0},{"rigctl_model":3063,"device":"\/dev\/ttyUSB1","serial_speed_baud":19200,"civ_address_hex":"7A","dummy_mode":1},{"rigctl_model":3081,"device":"\/dev\/ttyUSB2","serial_speed_baud":115200,"civ_address_hex":"7A","dummy_mode":0}]'<br>
 
 curl -XPUT localhost/hamlib_api_dl4oce/trx/0 -d'{"rigctl_model":"1020","device":"/dev/ttyUSB0","serial_speed_baud":38400,"dummy_mode":0}'<br>
 curl -XPUT localhost/hamlib_api_dl4oce/trx/0 -d'{"rigctl_model":"1020","device":"/dev/ttyUSB1","serial_speed_baud":38400,"dummy_mode":0}'<br>

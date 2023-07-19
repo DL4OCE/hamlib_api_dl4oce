@@ -19,6 +19,7 @@ require_once "lib/rotctl/rotctl.php";
 require_once "data/errors_hamlib.php";
 
 $device_array = json_decode(file_get_contents("data/config.json"), 1);
+sync_rigctl_instances();
 
 $router = new \Bramus\Router\Router();
 $router->set404(function() { 
@@ -187,6 +188,7 @@ $router->get('/rotator/(\d+)/capabilities', function($rotator_id) { echo get_rot
 
 
 $router->run();
+
 
 function getRequestBody(){
     $entityBody = file_get_contents('php://input');
